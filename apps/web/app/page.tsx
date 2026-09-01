@@ -1,2 +1,54 @@
-import { JarvisClient } from "../components/jarvis-client";
-export default function Home(){return <JarvisClient/>}
+"use client";
+
+import { useState } from "react";
+import { Activity, Bell, CalendarDays, CheckCircle2, ChevronDown, FileText, FolderKanban, Home, Menu, MessageSquare, Plus, Search, Settings, ShieldCheck, Sparkles, Users, X } from "lucide-react";
+
+const stats = [
+  ["Total Conversations", "1,248", "12.5%", MessageSquare],
+  ["Tasks Completed", "42", "16.3%", CheckCircle2],
+  ["Upcoming Tasks", "8", "View schedule", CalendarDays],
+  ["Files Processed", "256", "8.1%", FileText],
+];
+
+const tasks = ["Review project documentation", "Analyze market trends", "Team standup meeting", "Generate monthly report"];
+const conversations = ["AI Implementation Strategy", "Code Review Assistant", "Data Analysis Report", "Project Planning Discussion"];
+const activity = ["Document processed", "New task created", "Conversation updated", "Report generated"];
+
+function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <div className={`rounded-2xl border border-white/10 bg-white/[.035] shadow-xl backdrop-blur ${className}`}>{children}</div>;
+}
+
+export default function Home() {
+  const [mobileNav, setMobileNav] = useState(false);
+  const [query, setQuery] = useState("");
+  const nav = [
+    ["Dashboard", Home], ["Chat", MessageSquare], ["Tasks", CheckCircle2], ["Projects", FolderKanban], ["Calendar", CalendarDays], ["Knowledge Base", FileText], ["Files", FileText],
+  ];
+  return <main className="min-h-screen bg-[#050811] text-slate-100">
+    <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(116,72,255,.18),transparent_35%)]" />
+    <div className="relative flex min-h-screen">
+      <aside className={`fixed inset-y-0 left-0 z-40 w-64 border-r border-white/10 bg-[#070b15]/95 p-4 backdrop-blur-xl transition-transform lg:static lg:translate-x-0 ${mobileNav ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className="mb-7 flex items-center justify-between px-2"><div className="flex items-center gap-3"><div className="grid h-10 w-10 place-items-center rounded-full border-2 border-violet-400 shadow-[0_0_25px_rgba(139,92,246,.45)]"><Sparkles size={21} className="text-violet-300" /></div><span className="text-2xl font-bold tracking-wide">JARVIS</span></div><button className="lg:hidden" onClick={() => setMobileNav(false)}><X size={20}/></button></div>
+        <nav className="space-y-1">{nav.map(([label, Icon], i) => <button key={String(label)} className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm transition ${i === 0 ? "bg-violet-600/25 text-white shadow-inner" : "text-slate-400 hover:bg-white/5 hover:text-white"}`}><Icon size={18}/>{String(label)}</button>)}</nav>
+        <p className="mb-2 mt-8 px-4 text-[10px] font-semibold uppercase tracking-widest text-slate-600">Data & Analytics</p>
+        {[["Analytics", Activity],["Reports", FileText],["Logs", Activity]].map(([label, Icon]) => <button key={String(label)} className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-400 hover:bg-white/5 hover:text-white"><Icon size={18}/>{String(label)}</button>)}
+        <p className="mb-2 mt-8 px-4 text-[10px] font-semibold uppercase tracking-widest text-slate-600">System</p>
+        {[["Integrations", Sparkles],["Settings", Settings],["Users", Users]].map(([label, Icon]) => <button key={String(label)} className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-400 hover:bg-white/5 hover:text-white"><Icon size={18}/>{String(label)}</button>)}
+        <div className="absolute bottom-5 left-5 right-5 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[.03] p-3"><div className="relative grid h-9 w-9 place-items-center rounded-full bg-blue-500/15"><Sparkles size={16} className="text-blue-300"/><span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-[#070b15] bg-emerald-400"/></div><div><p className="text-sm font-medium">JARVIS AI</p><p className="text-xs text-slate-500">Online</p></div></div>
+      </aside>
+      {mobileNav && <button aria-label="Close navigation" className="fixed inset-0 z-30 bg-black/60 lg:hidden" onClick={() => setMobileNav(false)} />}
+      <section className="min-w-0 flex-1">
+        <header className="flex h-20 items-center gap-4 border-b border-white/10 px-5 lg:px-7"><button className="lg:hidden" onClick={() => setMobileNav(true)}><Menu/></button><div className="relative max-w-md flex-1"><Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={18}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search anything..." className="w-full rounded-xl border border-white/10 bg-white/[.04] py-2.5 pl-10 pr-4 text-sm outline-none focus:border-violet-400/50"/></div><div className="ml-auto flex items-center gap-4 text-slate-400"><span className="hidden sm:block">☼</span><div className="relative"><Bell size={19}/><span className="absolute -right-2 -top-2 grid h-4 w-4 place-items-center rounded-full bg-violet-500 text-[9px] text-white">3</span></div><div className="hidden items-center gap-2 sm:flex"><div className="h-9 w-9 rounded-full bg-gradient-to-br from-orange-300 to-slate-700"/><div className="text-xs"><p className="text-white">Linus</p><p className="text-slate-500">Admin</p></div><ChevronDown size={14}/></div></div></header>
+        <div className="mx-auto max-w-[1500px] space-y-5 p-5 lg:p-7"><div className="flex items-center justify-between"><div><h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Good evening, Linus 👋</h1><p className="mt-1 text-sm text-slate-400">Here’s what’s happening with JARVIS today.</p></div><button className="hidden items-center gap-2 rounded-xl bg-violet-600 px-4 py-2.5 text-sm font-medium shadow-lg shadow-violet-900/30 hover:bg-violet-500 sm:flex"><Plus size={17}/> New Task</button></div>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map(([title,value,delta,Icon]) => <Card key={String(title)} className="p-4"><div className="flex items-start justify-between"><div><p className="text-xs text-slate-400">{String(title)}</p><p className="mt-2 text-2xl font-semibold">{String(value)}</p></div><div className="rounded-xl bg-violet-500/15 p-2.5 text-violet-300"><Icon size={20}/></div></div><p className="mt-4 text-xs text-emerald-400">{String(delta).includes("%") ? `↑ ${String(delta)} from yesterday` : String(delta)}</p></Card>)}</div>
+          <div className="grid gap-4 xl:grid-cols-[1.6fr_1fr_300px]"><Card className="p-5"><div className="mb-5 flex items-center justify-between"><h2 className="font-semibold">Activity Overview</h2><button className="rounded-lg border border-white/10 px-3 py-1.5 text-xs text-slate-300">This Week <ChevronDown className="ml-1 inline" size={13}/></button></div><div className="h-56"><svg viewBox="0 0 700 220" className="h-full w-full"><defs><linearGradient id="fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#8b5cf6" stopOpacity=".3"/><stop offset="1" stopColor="#8b5cf6" stopOpacity="0"/></linearGradient></defs>{[30,70,110,150,190].map(y=><line key={y} x1="30" x2="680" y1={y} y2={y} stroke="rgba(255,255,255,.06)"/>)}<path d="M30 165 L135 120 L240 75 L345 115 L450 55 L565 125 L680 160 L680 190 L30 190 Z" fill="url(#fill)"/><polyline points="30,165 135,120 240,75 345,115 450,55 565,125 680,160" fill="none" stroke="#8b5cf6" strokeWidth="3"/>{[[30,165],[135,120],[240,75],[345,115],[450,55],[565,125],[680,160]].map(([x,y])=><circle key={x} cx={x} cy={y} r="4" fill="#a78bfa"/>)}<g fill="#64748b" fontSize="12" textAnchor="middle"><text x="30" y="210">Mon</text><text x="135" y="210">Tue</text><text x="240" y="210">Wed</text><text x="345" y="210">Thu</text><text x="450" y="210">Fri</text><text x="565" y="210">Sat</text><text x="680" y="210">Sun</text></g></svg></div></Card>
+            <Card className="p-5"><h2 className="font-semibold">JARVIS AI Status</h2><div className="grid place-items-center py-7"><div className="grid h-36 w-36 place-items-center rounded-full border-2 border-violet-500 shadow-[0_0_55px_rgba(139,92,246,.22)]"><div className="grid h-20 w-20 place-items-center rounded-full border border-blue-400/50 bg-blue-500/10 shadow-[0_0_30px_rgba(59,130,246,.4)]"><Sparkles className="text-blue-300"/></div></div><p className="mt-5 text-sm text-emerald-400">✓ All systems operational</p></div><div className="grid grid-cols-3 text-center text-xs text-slate-500"><span>Response Time<strong className="mt-1 block text-lg text-white">1.24s</strong></span><span>Accuracy<strong className="mt-1 block text-lg text-white">98.7%</strong></span><span>Uptime<strong className="mt-1 block text-lg text-white">99.9%</strong></span></div></Card>
+            <div className="space-y-4"><Card className="p-5"><h2 className="mb-4 font-semibold">System Status</h2>{["AI Service","Database","Vector Store","File Storage","Integrations"].map(x=><div key={x} className="flex justify-between py-1.5 text-xs"><span className="text-slate-300"><i className="mr-2 inline-block h-2 w-2 rounded-full bg-emerald-400"/>{x}</span><span className="text-emerald-400">Operational</span></div>)}</Card><Card className="p-5"><h2 className="mb-4 font-semibold">Quick Actions</h2>{["Start New Conversation","Create New Task","Upload Documents","Generate Report","Add to Knowledge Base"].map(x=><button key={x} className="mb-2 flex w-full items-center gap-3 rounded-lg border border-white/5 bg-white/[.03] px-3 py-2 text-left text-xs text-slate-300 hover:bg-white/[.07]"><Sparkles size={14} className="text-violet-300"/>{x}</button>)}</Card></div>
+          </div>
+          <div className="grid gap-4 xl:grid-cols-2"><Card className="p-5"><div className="mb-4 flex justify-between"><h2 className="font-semibold">Upcoming Tasks</h2><button className="text-xs text-blue-400">View All →</button></div>{tasks.map((x,i)=><div key={x} className="flex items-center justify-between border-t border-white/5 py-3 text-sm"><span><CheckCircle2 size={17} className="mr-3 inline text-violet-400"/>{x}</span><span className="text-xs text-slate-500">{["Today, 6:00 PM","Tomorrow, 10:00 AM","May 2, 2:00 PM","May 3, 9:00 AM"][i]}</span></div>)}</Card><Card className="p-5"><div className="mb-4 flex justify-between"><h2 className="font-semibold">Recent Conversations</h2><button className="text-xs text-blue-400">View All →</button></div>{conversations.map((x,i)=><div key={x} className="flex items-center justify-between border-t border-white/5 py-3 text-sm"><span><MessageSquare size={16} className="mr-3 inline text-violet-400"/>{x}</span><span className="text-xs text-slate-500">{["10:30 AM","Yesterday","Yesterday","Apr 28"][i]}</span></div>)}</Card></div>
+          <Card className="p-5 xl:hidden"><h2 className="mb-4 font-semibold">Recent Activity</h2>{activity.map((x,i)=><div key={x} className="flex items-center justify-between border-t border-white/5 py-3 text-xs"><span className="text-slate-300">{x}</span><span className="text-slate-500">{["2m ago","15m ago","32m ago","1h ago"][i]}</span></div>)}</Card>
+        </div>
+      </section>
+    </div>
+  </main>;
+}
