@@ -1,0 +1,273 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+  .:
+    devDependencies:
+      turbo:
+        specifier: ^2.4.4
+        version: 2.5.6
+      typescript:
+        specifier: ^5.8.2
+        version: 5.9.2
+
+  apps/companion:
+    dependencies:
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.18.6
+      tsx:
+        specifier: ^4.19.2
+        version: 4.20.5
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4
+
+  apps/web:
+    dependencies:
+      '@ai-sdk/openai':
+        specifier: ^3.0.0
+        version: 3.0.18(zod@4.1.5)
+      '@ai-sdk/react':
+        specifier: ^3.0.0
+        version: 3.0.36(react@19.1.1)(zod@4.1.5)
+      '@jarvis/agent':
+        specifier: workspace:*
+        version: link:../../packages/agent
+      '@jarvis/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@jarvis/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@jarvis/memory':
+        specifier: workspace:*
+        version: link:../../packages/memory
+      '@jarvis/policy':
+        specifier: workspace:*
+        version: link:../../packages/policy
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      '@jarvis/tools':
+        specifier: workspace:*
+        version: link:../../packages/tools
+      ai:
+        specifier: ^6.0.0
+        version: 6.0.40(zod@4.1.5)
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      lucide-react:
+        specifier: ^0.468.0
+        version: 0.468.0(react@19.1.1)
+      next:
+        specifier: ^16.0.0
+        version: 16.1.0(react-dom@19.1.1)(react@19.1.1)
+      react:
+        specifier: ^19.0.0
+        version: 19.1.1
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.1.1(react@19.1.1)
+      tailwind-merge:
+        specifier: ^3.0.1
+        version: 3.3.1
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4.1.0
+        version: 4.1.13
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.18.6
+      '@types/react':
+        specifier: ^19.0.2
+        version: 19.1.12
+      '@types/react-dom':
+        specifier: ^19.0.2
+        version: 19.1.9(@types/react@19.1.12)
+      '@vitest/coverage-v8':
+        specifier: ^3.0.0
+        version: 3.2.4(vitest@3.2.4)
+      eslint:
+        specifier: ^9.17.0
+        version: 9.35.0
+      eslint-config-next:
+        specifier: ^16.0.0
+        version: 16.1.0(eslint@9.35.0)(typescript@5.9.2)
+      tailwindcss:
+        specifier: ^4.1.0
+        version: 4.1.13
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4(@types/node@22.18.6)
+
+  packages/agent:
+    dependencies:
+      '@jarvis/memory':
+        specifier: workspace:*
+        version: link:../memory
+      '@jarvis/policy':
+        specifier: workspace:*
+        version: link:../policy
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../shared
+      '@jarvis/tools':
+        specifier: workspace:*
+        version: link:../tools
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4(@types/node@22.18.6)
+
+  packages/config:
+    dependencies:
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+
+  packages/db:
+    dependencies:
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../shared
+      drizzle-orm:
+        specifier: ^0.38.4
+        version: 0.38.4
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.20.5
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4(@types/node@22.18.6)
+
+  packages/integrations:
+    dependencies:
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+
+  packages/memory:
+    dependencies:
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../shared
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4(@types/node@22.18.6)
+
+  packages/policy:
+    dependencies:
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../shared
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4(@types/node@22.18.6)
+
+  packages/shared:
+    dependencies:
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4(@types/node@22.18.6)
+
+  packages/tools:
+    dependencies:
+      '@jarvis/policy':
+        specifier: workspace:*
+        version: link:../policy
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../shared
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4(@types/node@22.18.6)
+
+  packages/ui:
+    dependencies:
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      tailwind-merge:
+        specifier: ^3.0.1
+        version: 3.3.1
+
+  packages/workflows:
+    dependencies:
+      '@jarvis/policy':
+        specifier: workspace:*
+        version: link:../policy
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../shared
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      vitest:
+        specifier: ^3.0.5
+        version: 3.2.4(@types/node@22.18.6)
+
+  workers:
+    dependencies:
+      '@jarvis/shared':
+        specifier: workspace:*
+        version: link:../packages/shared
+      bullmq:
+        specifier: ^5.34.5
+        version: 5.58.5
+      zod:
+        specifier: ^4.0.0
+        version: 4.1.5
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.2
+        version: 22.18.6
+      tsx:
+        specifier: ^4.19.2
+        version: 4.20.5
+
+packages: {}
