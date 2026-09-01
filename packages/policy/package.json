@@ -1,0 +1,1 @@
+{"name":"@jarvis/policy","version":"0.1.0","private":true,"exports":"./src/index.ts","dependencies":{"@jarvis/shared":"workspace:*","zod":"^4.0.0"},"scripts":{"typecheck":"tsc --noEmit","test":"vitest run"}}

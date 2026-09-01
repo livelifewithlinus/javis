@@ -1,0 +1,1 @@
+{"name":"jarvis","version":"0.1.0","private":true,"packageManager":"pnpm@10.25.0","scripts":{"dev":"turbo dev --filter=web","build":"turbo build","lint":"turbo lint","typecheck":"turbo typecheck","test":"turbo test","seed":"pnpm --filter @jarvis/db seed"},"devDependencies":{"turbo":"^2.4.4","typescript":"^5.8.2"}}

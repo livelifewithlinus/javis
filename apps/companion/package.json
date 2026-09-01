@@ -1,0 +1,1 @@
+{"name":"@jarvis/companion","version":"0.1.0","private":true,"scripts":{"dev":"tsx src/index.ts","typecheck":"tsc --noEmit","test":"vitest run"},"dependencies":{"@jarvis/shared":"workspace:*","zod":"^4.0.0"},"devDependencies":{"@types/node":"^22.10.2","tsx":"^4.19.2","vitest":"^3.0.5"}}

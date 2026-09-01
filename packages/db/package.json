@@ -1,0 +1,1 @@
+{"name":"@jarvis/db","version":"0.1.0","private":true,"exports":"./src/index.ts","dependencies":{"@jarvis/shared":"workspace:*","drizzle-orm":"^0.38.4","zod":"^4.0.0"},"scripts":{"typecheck":"tsc --noEmit","test":"vitest run","seed":"tsx src/seed.ts"},"devDependencies":{"tsx":"^4.19.2","vitest":"^3.0.5"}}
