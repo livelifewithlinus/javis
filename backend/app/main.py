@@ -6,15 +6,11 @@ from pydantic import BaseModel, Field
 
 from .config import settings
 from .mt5_service import mt5_service
+from .websocket import router as websocket_router
 
-app = FastAPI(title="Javis MT5 Backend", version="1.0.0")
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app = FastAPI(title="Javis MT5 Backend", version="1.1.0")
+app.add_middleware(CORSMiddleware, allow_origins=settings.origins, allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.include_router(websocket_router)
 
 
 class MT5ConnectRequest(BaseModel):
@@ -24,9 +20,26 @@ class MT5ConnectRequest(BaseModel):
     path: str | None = None
 
 
+class OrderRequest(BaseModel):
+    symbol: str = Field(min_length=1, max_length=64)
+    side: str
+    volume: float = Field(gt=0)
+    sl: float | None = Field(default=None, ge=0)
+    tp: float | None = Field(default=None, ge=0)
+    deviation: int = Field(default=20, ge=0, le=1000)
+    magic: int = Field(default=260901, ge=0)
+
+
+class ClosePositionRequest(BaseModel):
+    ticket: int = Field(gt=0)
+    deviation: int = Field(default=20, ge=0, le=1000)
+
+
 def handle(fn):
     try:
         return fn()
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
     except RuntimeError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
 
@@ -65,3 +78,13 @@ def tick(symbol: str):
 @app.get("/api/mt5/positions")
 def positions():
     return handle(mt5_service.positions)
+
+
+@app.post("/api/mt5/orders")
+def create_order(req: OrderRequest):
+    return handle(lambda: mt5_service.order(req.symbol, req.side.lower(), req.volume, req.sl, req.tp, req.deviation, req.magic))
+
+
+@app.post("/api/mt5/positions/close")
+def close_position(req: ClosePositionRequest):
+    return handle(lambda: mt5_service.close_position(req.ticket, req.deviation))
